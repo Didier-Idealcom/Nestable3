@@ -3,7 +3,10 @@ $nestable-list-class: dd-list;
 $nestable-item-class: dd-item;
 $nestable-drag-class: dd-dragel;
 $nestable-handle-class: dd-handle;
+$nestable-content-class: dd-content;
+$nestable-content-more-class: dd-content-more;
 $nestable-collapsed-class: dd-collapsed;
+$nestable-expanded-content-class: dd-expanded-content;
 $nestable-placeholder-class: dd-placeholder;
 $nestable-no-children-class: dd-nochildren;
 $nestable-empty-class: dd-empty;
@@ -11,78 +14,118 @@ $nestable-empty-class: dd-empty;
 .#{$nestable-root-class} {
   position: relative;
   display: block;
+  max-width: 600px;
   margin: 0;
   padding: 0;
-  max-width: 600px;
-  list-style: none;
   font-size: 13px;
   line-height: 20px;
+  list-style: none;
 }
 
 .#{$nestable-list-class} {
-  display: block;
   position: relative;
+  display: block;
   margin: 0;
   padding: 0;
   list-style: none;
-
-  .#{$nestable-list-class} {
-    padding-left: 30px;
-  }
 }
 
 .#{$nestable-item-class},
 .#{$nestable-empty-class},
 .#{$nestable-placeholder-class} {
-  display: block;
   position: relative;
+  display: block;
+  min-height: 30px;
   margin: 0;
-  padding: 0;
-  min-height: 20px;
+  padding: 0 0 0 30px;
   font-size: 13px;
   line-height: 20px;
 }
 
 .#{$nestable-handle-class} {
+  position: absolute;
+  top: 0;
+  left: 0;
   display: block;
+  width: 30px;
   height: 30px;
-  margin: 5px 0;
-  padding: 5px 10px;
-  color: #333;
-  text-decoration: none;
-  font-weight: bold;
+  margin: 0;
+  background: linear-gradient(180deg, #ddd 0%, #bbb 100%);
   border: 1px solid #ccc;
-  background: #fafafa;
   border-radius: 3px;
   box-sizing: border-box;
+  overflow: hidden;
+  font-weight: bold;
+  color: #333;
+  text-decoration: none;
+  text-indent: 30px;
+  white-space: nowrap;
+  cursor: pointer;
+
+  &:before {
+    content: '≡';
+    position: absolute;
+    top: 4px;
+    left: 0;
+    display: block;
+    width: 100%;
+    font-size: 20px;
+    font-weight: normal;
+    color: #fff;
+    text-align: center;
+    text-indent: 0;
+  }
 
   &:hover {
+    background: #ddd;
     color: #2ea8e5;
-    background: #fff;
   }
+}
+
+.#{$nestable-content-class} {
+  display: block;
+  margin: 5px 0;
+  padding: 5px 10px 5px 40px;
+  background: linear-gradient(180deg, #fafafa 0%, #eee 100%);
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-weight: bold;
+  color: #333;
+  text-decoration: none;
+  line-height: 18px;
+
+  &:hover {
+    background: #fff;
+    color: #2ea8e5;
+  }
+}
+
+.#{$nestable-content-more-class} {
+  display: none;
+  margin-top: 10px;
 }
 
 .#{$nestable-item-class} > button {
   position: relative;
-  cursor: pointer;
   float: left;
   width: 25px;
   height: 20px;
   margin: 5px 0;
   padding: 0;
-  text-indent: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-  border: 0;
   background: transparent;
+  border: 0;
+  overflow: hidden;
   font-size: 12px;
+  font-weight: bold;
   line-height: 1;
   text-align: center;
-  font-weight: bold;
+  text-indent: 100%;
+  white-space: nowrap;
+  cursor: pointer;
 
   &:before {
-    display: block;
     position: absolute;
+    display: block;
     width: 100%;
     text-align: center;
     text-indent: 0;
@@ -93,6 +136,14 @@ $nestable-empty-class: dd-empty;
   }
 
   &.dd-collapse:before {
+    content: '-';
+  }
+
+  &.dd-expand-content:before {
+    content: '+';
+  }
+
+  &.dd-collapse-content:before {
     content: '-';
   }
 }
@@ -108,31 +159,40 @@ $nestable-empty-class: dd-empty;
   display: block;
 }
 
+.dd-collapse-content {
+  display: none;
+}
+.#{$nestable-expanded-content-class} > .dd-collapse-content {
+  display: block;
+}
+.#{$nestable-expanded-content-class} > .dd-expand-content {
+  display: none;
+}
+
 .#{$nestable-empty-class},
 .#{$nestable-placeholder-class} {
+  min-height: 30px;
   margin: 5px 0;
   padding: 0;
-  min-height: 30px;
   background: #f2fbff;
   border: 1px dashed #b6bcbf;
   box-sizing: border-box;
-  -moz-box-sizing: border-box;
 }
 
 .#{$nestable-empty-class} {
-  border: 1px dashed #bbb;
   min-height: 100px;
   background-color: #e5e5e5;
   background-size: 60px 60px;
   background-position: 0 0, 30px 30px;
+  border: 1px dashed #bbb;
 }
 
 .#{$nestable-drag-class} {
   position: absolute;
-  pointer-events: none;
   z-index: 9999;
+  pointer-events: none;
 
-  &> .#{$nestable-item-class} .#{$nestable-handle-class} {
+  & > .#{$nestable-item-class} .#{$nestable-handle-class} {
     margin-top: 0;
   }
 

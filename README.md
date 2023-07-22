@@ -1,4 +1,4 @@
-Nestable2
+Nestable3
 ========
 
 ```
@@ -8,52 +8,46 @@ If there is anyone that wants to help me out with this, please message me trough
 
 ### Drag & drop hierarchical list with mouse and touch compatibility (jQuery / Zepto plugin)
 
-[![Status](https://img.shields.io/maintenance/yes/2018)](#)
+[![Status](https://img.shields.io/maintenance/no/2023)](#)
 [![Demo](https://img.shields.io/badge/demo-live-brightgreen.svg?style=flat-square)](https://ramonsmit.github.com/Nestable2/)
 [![Build Status](https://travis-ci.org/RamonSmit/Nestable2.svg)](https://travis-ci.org/RamonSmit/Nestable2)
 [![License](https://img.shields.io/npm/l/nestable2.svg?style=flat-square)](https://github.com/RamonSmit/Nestable2/blob/master/LICENSE)
-[![NPM version](https://img.shields.io/npm/v/nestable2.svg?style=flat-square)](https://www.npmjs.com/package/nestable2)
+[![NPM version](https://img.shields.io/npm/v/nestable3.svg?style=flat-square)](https://www.npmjs.com/package/nestable3)
 [![Bower version](https://img.shields.io/bower/v/nestable2.svg?style=flat-square)](#bower)
 
 Nestable is an experimental example and IS under active development. If it suits your requirements feel free to expand upon it!
 
 ## Install
 
-You can install this package either with `npm` or with `bower`.
+You can install this package with `npm`.
 
 ### npm
 
 ```shell
-npm install --save nestable2
+npm install --save nestable3
 ```
 
 Then add a `<script>` to your `index.html`:
 
 ```html
-<script src="/node_modules/nestable2/jquery.nestable.js"></script>
+<script src="/node_modules/nestable3/jquery.nestable.js"></script>
 ```
 
-Or `require('nestable2')` from your code.
-
-### bower
-
-```shell
-bower install --save nestable2
-```
+Or `require('nestable3')` from your code.
 
 ### CDN
 
-You can also find us on [CDNJS](https://cdnjs.com/libraries/nestable2):
+You can also find us on [CDNJS](https://cdnjs.com/libraries/nestable3):
 
 ```
-//cdnjs.cloudflare.com/ajax/libs/nestable2/1.6.0/jquery.nestable.min.css
-//cdnjs.cloudflare.com/ajax/libs/nestable2/1.6.0/jquery.nestable.min.js
+//cdnjs.cloudflare.com/ajax/libs/nestable3/1.0.0/jquery.nestable.min.css
+//cdnjs.cloudflare.com/ajax/libs/nestable3/1.0.0/jquery.nestable.min.js
 ```
 
-You can also find us on [jsDelivr](https://www.jsdelivr.com/package/npm/nestable2)
+You can also find us on [jsDelivr](https://www.jsdelivr.com/package/npm/nestable3)
 ```
-//cdn.jsdelivr.net/npm/nestable2@1.6.0/jquery.nestable.min.js
-//cdn.jsdelivr.net/npm/nestable2@1.6.0/jquery.nestable.min.css
+//cdn.jsdelivr.net/npm/nestable3@1.0.0/jquery.nestable.min.js
+//cdn.jsdelivr.net/npm/nestable3@1.0.0/jquery.nestable.min.css
 ```
 
 ## Usage
@@ -63,19 +57,49 @@ Write your nested HTML lists like so:
 <div class="dd">
     <ol class="dd-list">
         <li class="dd-item" data-id="1">
-            <div class="dd-handle">Item 1</div>
+            <div class="dd-handle">Drag</div>
+            <div class="dd-content">
+                Item 1
+                <div class="dd-content-more">
+                    ...
+                </div>
+            </div>
         </li>
         <li class="dd-item" data-id="2">
-            <div class="dd-handle">Item 2</div>
+            <div class="dd-handle">Drag</div>
+            <div class="dd-content">
+                Item 2
+                <div class="dd-content-more">
+                    ...
+                </div>
+            </div>
         </li>
         <li class="dd-item" data-id="3">
-            <div class="dd-handle">Item 3</div>
+            <div class="dd-handle">Drag</div>
+            <div class="dd-content">
+                Item 3
+                <div class="dd-content-more">
+                    ...
+                </div>
+            </div>
             <ol class="dd-list">
                 <li class="dd-item" data-id="4">
-                    <div class="dd-handle">Item 4</div>
+                    <div class="dd-handle">Drag</div>
+                    <div class="dd-content">
+                        Item 4
+                        <div class="dd-content-more">
+                            ...
+                        </div>
+                    </div>
                 </li>
                 <li class="dd-item" data-id="5" data-foo="bar">
-                    <div class="dd-nodrag">Item 5</div>
+                    <div class="dd-handle">Drag</div>
+                    <div class="dd-content">
+                        Item 5
+                        <div class="dd-content-more">
+                            ...
+                        </div>
+                    </div>
                 </li>
             </ol>
         </li>
@@ -332,11 +356,14 @@ These advanced config options are also available:
 * `noDragClass` The class applied to an element to prevent dragging (default `'dd-nodrag'`)
 * `handleClass` The class of the content element inside each list item (default `'dd-handle'`)
 * `collapsedClass` The class applied to lists that have been collapsed (default `'dd-collapsed'`)
+* `expandedContentClass` The class applied to lists that have been collapsed (default `'dd-expanded-content'`)
 * `noChildrenClass` The class applied to items that cannot have children (default `'dd-nochildren'`)
 * `placeClass` The class of the placeholder element (default `'dd-placeholder'`)
 * `emptyClass` The class used for empty list placeholder elements (default `'dd-empty'`)
-* `expandBtnHTML` The HTML text used to generate a list item expand button (default `'<button data-action="expand">Expand></button>'`)
-* `collapseBtnHTML` The HTML text used to generate a list item collapse button (default `'<button data-action="collapse">Collapse</button>'`)
+* `expandBtnHTML` The HTML text used to generate a list item expand button (default `'<button class="dd-expand" data-action="expand">Expand></button>'`)
+* `collapseBtnHTML` The HTML text used to generate a list item collapse button (default `'<button class="dd-collapse" data-action="collapse">Collapse</button>'`)
+* `expandContentBtnHTML` The HTML text used to generate a list item expand content button (default `'<button class="dd-expand-content" data-action="expand_content" type="button">Expand</button>'`)
+* `collapseContentBtnHTML` The HTML text used to generate a list item collapse content button (default `'<button class="dd-collapse-content" data-action="collapse_content" type="button">Collapse</button>'`)
 * `includeContent` Enable or disable the content in output (default `false`)
 * `listRenderer` The callback for customizing final list output (default `function(children, options) { ... }` - see defaults in code)
 * `itemRenderer` The callback for customizing final item output (default `function(item_attrs, content, children, options) { ... }` - see defaults in code)
@@ -345,6 +372,10 @@ These advanced config options are also available:
 **Inspect the [Nestable2 Demo](https://ramonsmit.github.io/Nestable2/) for guidance.**
 
 ## Change Log
+
+### 22th July 2023
+* Upgrade to Gulp 4
+* Added collapse/expand content options
 
 ### 21th October 2017
 * [klgd] Fixed conflict when project using also jQuery 2.*
@@ -467,6 +498,6 @@ Contributors :
 
 * Cyril [http://tchap.me](http://tchap.me), Craig Sansam
 * Zemistr [http://zemistr.eu](http://zemistr.eu), Martin Zeman
-* And alot more. 
+* And a lot more. 
 
-Copyright © 2012 David Bushell / © Ramon Smit 2014/2017 | BSD & MIT license
+Copyright © 2012 David Bushell / © Ramon Smit 2014/2017 / © Didier Largeron 2023 | BSD & MIT license

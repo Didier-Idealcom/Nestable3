@@ -1,6 +1,6 @@
 {
-  "name": "nestable2",
-  "version": "1.6.0",
+  "name": "nestable3",
+  "version": "1.0.0",
   "description": "Drag & drop hierarchical list with mouse and touch compatibility",
   "main": "jquery.nestable.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/RamonSmit/Nestable2.git"
+    "url": "git://github.com/Didier-Idealcom/Nestable3.git"
   },
   "keywords": [
     "jquery",
@@ -17,13 +17,13 @@
     "sortable",
     "nestable",
     "nestable2",
+    "nestable3",
     "drag",
     "drop"
   ],
   "author": {
-    "name": "David Bushell",
-    "email": "hi@dbushell.com",
-    "url": "https://github.com/dbushell"
+    "name": "Didier Largeron",
+    "email": "largeron.didier@gmail.com"
   },
   "contributors": [
     {
@@ -37,22 +37,23 @@
     {
       "name": "Marek Skiba",
       "email": "skibamarek@gmail.com"
+    },
+    {
+      "name": "David Bushell",
+      "email": "hi@dbushell.com"
     }
   ],
   "dependencies": {
     "jquery": ">=1.7.2"
   },
   "devDependencies": {
-    "gulp": "^3.9.1",
-    "gulp-clean-css": "^3.4.2",
-    "gulp-eslint": "^4.0.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-uglify": "^3.0.0",
-    "gulp-sass": "^3.1.0"
+    "gulp": "^4.0.2",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-eslint": "^6.0.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-sass": "^5.1.0",
+    "gulp-uglify": "^3.0.2",
+    "node-sass": "^9.0.0"
   },
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/RamonSmit/Nestable2/issues"
-  },
-  "homepage": "https://github.com/RamonSmit/Nestable2#readme"
+  "license": "MIT"
 }

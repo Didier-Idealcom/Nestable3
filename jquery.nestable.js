@@ -37,12 +37,15 @@
         handleClass: 'dd-handle',
         contentClass: 'dd-content',
         collapsedClass: 'dd-collapsed',
+        expandedContentClass: 'dd-expanded-content',
         placeClass: 'dd-placeholder',
         noDragClass: 'dd-nodrag',
         noChildrenClass: 'dd-nochildren',
         emptyClass: 'dd-empty',
         expandBtnHTML: '<button class="dd-expand" data-action="expand" type="button">Expand</button>',
         collapseBtnHTML: '<button class="dd-collapse" data-action="collapse" type="button">Collapse</button>',
+        expandContentBtnHTML: '<button class="dd-expand-content" data-action="expand_content" type="button">Expand</button>',
+        collapseContentBtnHTML: '<button class="dd-collapse-content" data-action="collapse_content" type="button">Collapse</button>',
         group: 0,
         maxDepth: 5,
         threshold: 20,
@@ -153,6 +156,12 @@
                 }
                 if (action === 'expand') {
                     list.expandItem(item);
+                }
+                if (action === 'collapse_content') {
+                    list.collapseItemContent(item);
+                }
+                if (action === 'expand_content') {
+                    list.expandItemContent(item);
                 }
             });
 
@@ -647,6 +656,16 @@
             this.pointEl = null;
         },
 
+        expandItemContent: function(li) {
+            li.addClass(this.options.expandedContentClass);
+            li.find('> .' + this.options.contentClass + ' .' + this.options.contentClass + '-more').slideDown();
+        },
+
+        collapseItemContent: function(li) {
+            li.removeClass(this.options.expandedContentClass);
+            li.find('> .' + this.options.contentClass + ' .' + this.options.contentClass + '-more').slideUp();
+        },
+
         expandItem: function(li) {
             li.removeClass(this.options.collapsedClass);
         },
@@ -673,10 +692,16 @@
         },
 
         setParent: function(li) {
+            if (li.find('> [data-action="expand_content"]').length == 0) {
+                li.prepend($(this.options.expandContentBtnHTML));
+                li.prepend($(this.options.collapseContentBtnHTML));
+            }
+
             //Check if li is an element of itemNodeName type and has children
             if (li.is(this.options.itemNodeName) && li.children(this.options.listNodeName).length) {
                 // make sure NOT showing two or more sets data-action buttons
-                li.children('[data-action]').remove();
+                li.children('[data-action="collapse"]').remove();
+                li.children('[data-action="expand"]').remove();
                 li.prepend($(this.options.expandBtnHTML));
                 li.prepend($(this.options.collapseBtnHTML));
             }
@@ -684,7 +709,8 @@
 
         unsetParent: function(li) {
             li.removeClass(this.options.collapsedClass);
-            li.children('[data-action]').remove();
+            li.children('[data-action="collapse"]').remove();
+            li.children('[data-action="expand"]').remove();
             li.children(this.options.listNodeName).remove();
         },
 
